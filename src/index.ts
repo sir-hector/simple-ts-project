@@ -1,9 +1,23 @@
-import { render } from "./AppLoader";
+import './global.styles.scss';
 
-const element = document.getElementById("root-element");
+const redirectFunction = (locaction: string): void => {
+  window.location.hash = `#/${locaction}`
+}
 
-if (element) {
-  render(element);
+const frontendButton = document.getElementById('fe-button')
+
+if(frontendButton) {
+  frontendButton.addEventListener('click',  () => 
+    redirectFunction('frontend')
+  )
+}
+
+const backendButton = document.getElementById('be-button')
+
+if(backendButton) {
+  backendButton.addEventListener('click',  () => 
+    redirectFunction('backend')
+  )
 }
 
 export {};
