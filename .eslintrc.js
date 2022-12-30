@@ -303,7 +303,7 @@ module.exports = {
     "@typescript-eslint/unified-signatures": 2,
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "linebreak-style": [2, "unix"],
+    "linebreak-style": [2, "windows"],
     semi: [2, "always"],
     "no-trailing-spaces": 2,
     "no-multiple-empty-lines": [

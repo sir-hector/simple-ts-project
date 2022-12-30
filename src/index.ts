@@ -1,4 +1,11 @@
+import BasketStorage from './BasketStorage/BasketStorage';
 import './global.styles.scss';
+
+declare global {
+  interface Window {
+    basket: BasketStorage;
+  }
+}
 
 const redirectFunction = (locaction: string): void => {
   window.location.hash = `#/${locaction}`
@@ -19,5 +26,9 @@ if(backendButton) {
     redirectFunction('backend')
   )
 }
+
+const storage = new BasketStorage();
+
+window.basket = storage;
 
 export {};
