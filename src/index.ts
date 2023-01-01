@@ -1,6 +1,7 @@
 import BasketStorage from './BasketStorage/BasketStorage';
 import Router from './Router/Router';
 import './global.styles.scss';
+import Basket from './Basket/Basket';
 
 declare global {
   interface Window {
@@ -30,6 +31,7 @@ if(backendButton) {
 
 const storage = new BasketStorage();
 const router = new Router();
+const basket = new Basket('basket', storage)
 router.addRoute({name: 'frontend', renderFunction: () => console.log('route od frontendu')})
 router.addRoute({name: 'backend', renderFunction: () => console.log('route od backendu')})
 
