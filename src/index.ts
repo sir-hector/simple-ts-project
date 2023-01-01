@@ -32,6 +32,7 @@ if(backendButton) {
 const storage = new BasketStorage();
 const router = new Router();
 const basket = new Basket('basket', storage)
+basket.addToBasket({id: '1', name: 'test', quantity:2, price: 12 })
 router.addRoute({name: 'frontend', renderFunction: () => console.log('route od frontendu')})
 router.addRoute({name: 'backend', renderFunction: () => console.log('route od backendu')})
 

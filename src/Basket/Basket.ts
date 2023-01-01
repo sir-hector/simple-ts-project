@@ -28,6 +28,51 @@ class Basket {
         throw Error('Nie odnaleziono elementu koszyka')
     }
 
+    public addToBasket(product: BasketProduct): void {
+        if(this.isProductAlreadyInBasket(product.id)){
+            this.changeProductQuantity(product.id, product.quantity)
+        } else {
+            this.products.push(product);
+            this.refreshBasketData();
+        }
+        this.storage.saveItems(this.products);
+    }
+
+    public increaseQuantity(id: string): void {
+        this.changeProductQuantity(id, 1)
+        this.storage.saveItems(this.products);
+    }
+
+    public decreaseQuantity (id: string): void {
+        this.changeProductQuantity(id, -1)
+        this.storage.saveItems(this.products);
+    }
+
+    private isProductAlreadyInBasket(id: string): boolean{
+        return this.products.some(product => product.id ===id)
+    }
+
+    private changeProductQuantity(id: string, quantity: number): void{
+        let indexProductToRomove: number | null = null;
+
+        this.products.forEach((product, index) => {
+            if(product.id !==id){
+                return
+            }
+
+            product.quantity += quantity;
+            if(product.quantity === 0) {
+                indexProductToRomove = index;
+            }
+        });
+
+        if(indexProductToRomove !== null) {
+            this.products.splice(indexProductToRomove, 1)
+        }
+
+        this.refreshBasketData();
+    }
+
     private attachBasketToDOM(): void {
         this.rootElement.classList.add(Basket.BASKET_CLASS);
         this.appendBasketButton();
@@ -83,10 +128,10 @@ class Basket {
         
         listElement.classList.add(Basket.PRODUCTS_LIST_ITEM_CLASS);
         increaseButton.addEventListener('click', ()=> {
-            console.log('dodano')
+            this.increaseQuantity(product.id)
         })
         decreaseButton.addEventListener('click', ()=> {
-            console.log('dodano')
+            this.decreaseQuantity(product.id)
         })
 
         listElement.appendChild(productInfoElement);
