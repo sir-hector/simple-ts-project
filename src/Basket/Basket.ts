@@ -68,7 +68,32 @@ class Basket {
             this.basketProductList.firstChild.remove();
         }
 
-        // this.products.forEach(this.createListElement)
+        this.products.forEach(this.createListElement)
+    }
+
+    private readonly createListElement = (product: BasketProduct): void => {
+        const listElement = document.createElement('li');
+        const productInfoElement = document.createElement('p');
+        const increaseButton = document.createElement('button');
+        const decreaseButton = document.createElement('button');
+
+        productInfoElement.textContent = `${product.name}, ilość ${product.quantity}`;
+        increaseButton.textContent = '+';
+        decreaseButton.textContent = '-';
+        
+        listElement.classList.add(Basket.PRODUCTS_LIST_ITEM_CLASS);
+        increaseButton.addEventListener('click', ()=> {
+            console.log('dodano')
+        })
+        decreaseButton.addEventListener('click', ()=> {
+            console.log('dodano')
+        })
+
+        listElement.appendChild(productInfoElement);
+        listElement.appendChild(increaseButton);
+        listElement.appendChild(decreaseButton);
+
+        this.basketProductList.appendChild(listElement);
     }
 }
 
